@@ -1,7 +1,51 @@
 import './App.css';
 import { Link} from "react-router-dom";
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { redirect } from "react-router-dom";
 
 function App() {
+    const navigate = useNavigate();
+    const handleSubmit =(event)=>{
+        event.preventDefault();
+        const data =new FormData(event.target);
+        data.get("textEmail")
+        const userData =
+        {
+         email: data.get("textEmail"),
+         pass:data.get("txtPassword")
+        }
+
+            alert(userData.email)
+
+            const requestOptions = {        method: 'POST', headers: { 'Content-Type': 'application/json' },      
+                      body: JSON.stringify(userData) };    
+                      fetch('http://localhost:5000/usuarios/login', requestOptions)   // ruta del back
+                      .then(response => response.json())        
+                      .then(data => { console.log('los datos recibidos fueron', data); 
+                      if(data.token !== null ){
+                        console.log('intento de redirect')
+                        window.localStorage.setItem('username', userData.email)
+                        window.localStorage.getItem('username')
+                        navigate('/Menu');
+                      }
+                    });
+       }
+      
+ 
+    // useEffect(() => {    // POST request using fetch inside useEffect React hook    
+    //                 const requestOptions = {        method: 'POST', headers: { 'Content-Type': 'application/json' },      
+    //                   body: JSON.stringify({ email: 'jguell@uninorte.edu.co',
+    //                                          pass: 'admin'
+    //                  })    };    
+    //                   fetch('http://localhost:5000/usuarios/login', requestOptions)   // ruta del back
+    //                   .then(response => response.json())        
+    //                   .then(data => console.log('los datos recibidos fueron', data));
+    
+    //                   // empty dependency array means this effect will only run once (like componentDidMount in classes)
+    //                 }, []);
+
+
   return (
     <div className="container w-75 bg-primary mt-1 rounded shadow">
     <div className="row align-items-stretch">
@@ -17,7 +61,7 @@ function App() {
 
             {/* <!--  LOGIN  --> */}
 
-            <form action="/Menu" method="post">
+            <form name='FormsLogin' onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label for="email" className="form-label"> Correo Electronico </label>
                     <input type="email" className="form-control" name="textEmail" id=""/>

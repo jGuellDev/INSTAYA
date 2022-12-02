@@ -6,6 +6,8 @@ const jwt = require("jsonwebtoken")
 
 exports.login = function(req, res, next){
 
+  console.log('estoy recibiendo una peticion en la ruta login')
+
     let hasehdPass = crypto.createHash("sha512").update(req.body.pass).digest("hex") // retonar 128 caracteres y es el que pusimos como maximo en usuarios models
     
     Usuario.findOne( {email: req.body.email, pass: hasehdPass}, function(err, email){

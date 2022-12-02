@@ -23,12 +23,12 @@ const Tabla = (props) => {
                 {data.map((dato)=>{
                     return(
                 <tr>
-                    <Link to="/Actualizacion">
-                    <td>{dato.servicio}</td>
+                    <Link to={"/Actualizacion/" + dato.nuemroOrden}>
+                    <td>{dato.nuemroOrden}</td>
                      </Link>                  
                   <td>{dato.fecha}</td>
                   <td>{dato.ciudadEntrega}</td>
-                  <td>{dato.DirEntrega}</td>
+                  <td>{dato.direccionEntrega}</td>
                   <td>{dato.estado}</td>
                 </tr>
                 )})}

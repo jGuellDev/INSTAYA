@@ -12,7 +12,7 @@ const auth = (req, res, next) => {
             next()
         } catch(error){
             res.status(401)
-            res.json({code: 4, msg:"No tienes permiso para acceder", error: error}) // buscar liberia para manejador de errores, debes ubicarlo en error:error.
+            res.json({code: 4, msg:"No tienes permiso para acceder", error: error}) // buscar liberia para manejador de errores, debes ubicarlo en error:error. ---
     }
 }
 

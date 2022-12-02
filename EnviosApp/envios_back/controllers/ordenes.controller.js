@@ -51,6 +51,7 @@ exports.create = function (req, res) {
 // Metodo Find
 
 exports.find = function (req, res) {
+  console.log('Recibi una peticion en la ruta ordenes')
   Orden.find(function (err, ordenes) {
     // en caso que no de error, devuelve los orden.
     res.json(ordenes);
@@ -60,7 +61,7 @@ exports.find = function (req, res) {
 // Metodo Find One
 
 exports.findOne = function (req, res) {
-  Orden.findOne({ _id: req.params.id }, function (err, orden) {
+  Orden.findOne({ nuemroOrden: req.params.id }, function (err, orden) {
     // en caso que no de error, devuelve el orden.
     res.json(orden);
 

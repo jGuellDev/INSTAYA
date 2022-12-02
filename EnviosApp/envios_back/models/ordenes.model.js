@@ -7,6 +7,7 @@ const Schema = mongoose.Schema; // mongoose trabaja con schemas = colecciones(ta
 // modelo de la base de datos.
 
 const OrdenesSchema = new Schema({
+    nuemroOrden: {type: Number, required: true}, 
     largo: {type: String, required: true, maxLength: 60}, // campo y dentro, tipo de dato, si es requerido o no, y la cantidad de caracteres.
     ancho: {type: String, required: true, maxLength: 60},
     alto: {type: String, required: true, maxLength: 60},
@@ -17,8 +18,11 @@ const OrdenesSchema = new Schema({
     cedulaDestinatario: {type: String, required: true, maxLength: 100},
     direccionEntrega: {type: String, required: true, maxLength: 100},
     ciudadEntrega: {type: String, required: true, maxLength: 100},
-    estado: {type: String, required: true, maxLength: 100},
-    usuario: {type: String, required: true, maxLength: 100}
+    estado: {type: String,
+		enum: ['guardado', 'cancelado', 'cumplido'],
+		default: 'guardado'},
+    usuario: {type: String, required: true, maxLength: 100},
+    fecha: {type: Date, default: Date}
     
 }, { versionKey: '' });
 

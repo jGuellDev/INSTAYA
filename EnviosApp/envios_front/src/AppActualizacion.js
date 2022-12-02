@@ -1,14 +1,31 @@
-import { Link} from "react-router-dom";
-import React, { useState } from 'react';
+import { Link, useParams} from "react-router-dom";
+import React, { useState, useEffect } from 'react';
 import FormularioOrden from "./Components/FormularioOrden";
+
 function App4() {
   const[ordenesApi,setordenesApi]=React.useState([]);
-  React.useEffect(() => {
-fetch('http://localhost:3004/ordenes')
-.then(response => response.json())
-.then (data => setordenesApi(data));
+  const {id} = useParams()
 
-  },[]);
+
+  //   React.useEffect(() => {
+//   console.log("estoy imprimiendo,", infoOrder)
+//  fetch('http://localhost:3004/ordenes')
+// .then(response => response.json())
+// .then (data => setordenesApi(data));
+
+//   },[]);
+
+
+useEffect(() => {    // POST request using fetch inside useEffect React hook    
+  const requestOptions = {  method: 'GET', headers: { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzN2Q0MjZiZDUxYTRhYTM4NTk4MDhlZCIsInVzdWFyaW8iOiJqbGd1ZWxsQHVuaW5vcnRlLmVkdS5jbyIsImlhdCI6MTY2OTY5Mjk1OX0.zDSsBpKbaKHVCqjJ_1UAG43kXKYkxjt21cXzyGiKYr4' },      
+        };
+        console.log('estoy imprimiendo id: ',id)       
+    fetch('http://localhost:5000/ordenes/'+id, requestOptions)   // ruta del back
+    .then(response => response.json())        
+    .then(data => { console.log('los datos recibidos fueron', data); setordenesApi(data) });
+
+    // empty dependency array means this effect will only run once (like componentDidMount in classes)
+  }, []);
 
   
 

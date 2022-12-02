@@ -2,17 +2,31 @@ import './App.css';
 import { Link} from "react-router-dom";
 import Tabla from './Components/Tabla';
 import { Dataordenes } from './utils/dataOrdenes';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+
 
 function App5() {
   // const[usuario,setUsuario]=useState(Dataordenes)
   const[ordenesApi,setordenesApi]=React.useState([]);
-  React.useEffect(() => {
-fetch('http://localhost:3004/ordenes')
-.then(response => response.json())
-.then (data => setordenesApi(data));
+  // React.useEffect(() => {
+//fetch('http://localhost:5000/login')
+// fetch('http://localhost:3004')
+// .then(response => response.json())
+// .then (data => setordenesApi(data));
 
-  },[]);
+//   },[]);
+
+
+  useEffect(() => {    // POST request using fetch inside useEffect React hook    
+                    const requestOptions = {  method: 'GET', headers: { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzN2Q0MjZiZDUxYTRhYTM4NTk4MDhlZCIsInVzdWFyaW8iOiJqbGd1ZWxsQHVuaW5vcnRlLmVkdS5jbyIsImlhdCI6MTY2OTY5Mjk1OX0.zDSsBpKbaKHVCqjJ_1UAG43kXKYkxjt21cXzyGiKYr4' },      
+                          };    
+                      fetch('http://localhost:5000/ordenes/buscartodos', requestOptions)   // ruta del back
+                      .then(response => response.json())        
+                      .then(data => { console.log('los datos recibidos POR MENU fueron', data); setordenesApi(data) });
+    
+                      // empty dependency array means this effect will only run once (like componentDidMount in classes)
+                    }, []);
 
   return (
     <div>

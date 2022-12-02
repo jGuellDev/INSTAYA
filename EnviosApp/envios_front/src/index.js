@@ -18,7 +18,7 @@ root.render(
 <Route exact path="/" element={<App/>} />
 <Route path="/Registro" element={<App2/>} />
 <Route path="/RegisterOrdenes" element={<App3/>} />
-<Route path="/Actualizacion" element={<App4/>} />
+<Route path="/Actualizacion/:id" element={<App4/>} />
 <Route path="/Menu" element={<App5/>} />
 
 </Routes>
