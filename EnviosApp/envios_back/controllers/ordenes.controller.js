@@ -33,6 +33,7 @@ exports.create = function (req, res) {
   // })
 
   let orden = new Orden(req.body);
+  console.log('Recibi una peticion en la ruta crear ordenes')
 
   orden.save(function (err, result) {
     // funcion de mongoose para guardar el dato --- guardar error, guarda sucess
@@ -52,16 +53,16 @@ exports.create = function (req, res) {
 
 exports.find = function (req, res) {
   console.log('Recibi una peticion en la ruta ordenes')
-  Orden.find(function (err, ordenes) {
+  Orden.find({ usuario: req.params.usuario },function (err, orden) {
     // en caso que no de error, devuelve los orden.
-    res.json(ordenes);
+    res.json(orden);
   });
 };
 
 // Metodo Find One
 
 exports.findOne = function (req, res) {
-  Orden.findOne({ nuemroOrden: req.params.id }, function (err, orden) {
+  Orden.findOne({ numeroOrden: req.params.id }, function (err, orden) {
     // en caso que no de error, devuelve el orden.
     res.json(orden);
 
@@ -72,6 +73,8 @@ exports.findOne = function (req, res) {
 // Metodo UPDATE
 
 exports.update = function (req, res) {
+
+
   let orden = {
     largo: req.body.largo,
     ancho: req.body.ancho,
@@ -85,13 +88,16 @@ exports.update = function (req, res) {
     ciudadEntrega: req.body.ciudadEntrega,
     estado: req.body.estado,
     usuario: req.body.usuario,
+    numeroOrden:req.body.numeroOrden
+   
   };
-
-  Orden.findByIdAndUpdate(req.params.id, { $set: orden }, function (err) {
+  // console.log('Recibi una peticion en la ruta actualizar  ordenes')
+  Orden.findOneAndUpdate(req.params.numeroOrden, { $set: orden }, function (err) {
+    
     if (err) {
       console.error(err);
       (response.exito = false),
-        (response.msg = "Error al actualizar el Orden");
+        (response.msg = "Error al actualizar el Ordenes prueba");
       res.json(response);
       return;
     }

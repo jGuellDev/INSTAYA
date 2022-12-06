@@ -1,8 +1,69 @@
 import './App.css';
 import { Link} from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
 
 
 function App2() {
+
+  const navigate = useNavigate(); 
+  
+
+
+
+  const handleSubmit =(event)=>{
+   
+    event.preventDefault();
+    const data =new FormData(event.target);
+    const UserCreate =
+    {
+      usuario: data.get("Nombre"),
+      pass: data.get("Pass"),
+      email: data.get("email"),
+      ciudad: data.get("Ciudad"),
+      direccion: data.get("Direccion"),
+     
+
+    }
+    console.log('respuesta de ENVIO DE DATOS', UserCreate)
+
+    const requestOptionsValidate = {method: 'POST', headers: { 'Content-Type': 'application/json'},      
+    body: JSON.stringify(UserCreate) };    
+    fetch('http://localhost:5000/usuarios/login', requestOptionsValidate)   // ruta del back
+    .then(response => response.json())        
+    .then(data => { console.log('respuesta de consulta Usuario', data);
+    if(data.token == null ){
+      
+      const requestOptions = {method: 'POST', headers: { 'Content-Type': 'application/json'},      
+      body: JSON.stringify(UserCreate) };    
+      fetch('http://localhost:5000/usuarios/reg', requestOptions)   // ruta del back
+      .then(response => response.json())        
+      .then(data => { console.log('respuesta de consulta', data);
+      alert("Usuario Creado con exito")
+
+   });
+
+    
+
+    
+    
+    
+    
+    }
+    if(data.token !== null ){
+      
+      alert("Usuario Ya existe")
+      navigate('/Registro');
+    }  
+
+ });
+
+ 
+  
+   
+  }
+
+
   return (
 
     <div className="container w-75 bg-primary mt-1 rounded shadow">
@@ -19,30 +80,30 @@ function App2() {
 
             {/* <!--  LOGIN  --> */}
 
-            <form action="/procesar/usuario" method="post" className="row g-3">
+            <form name='FormsCrear' onSubmit={handleSubmit} className="row g-3">
                 <div className="col-md-6">
                     <label for="inputEmail4" className="form-label">Email</label>
-                    <input type="email" className="form-control" name="textEmail" id="" placeholder="Ingrese Correo Electronico"/>
+                    <input type="email" className="form-control" name="email" id="" placeholder="Ingrese Correo Electronico"/>
                   </div>
                 <div className="col-md-6">
                   <label for="inputPassword4" className="form-label">Contraseña</label>
-                  <input type="password" className="form-control" name="txtPassword" id="" placeholder="Ingrese Contraseña"/>
+                  <input type="password" className="form-control" name="Pass" id="" placeholder="Ingrese Contraseña"/>
                 </div>
                 <div className="col-md-6">
                   <label for="inputPassword4" className="form-label">Confirmar Contraseña</label>
-                  <input type="password" className="form-control" name="txtPassword" id="" placeholder="Ingrese Contraseña"/>
+                  <input type="password" className="form-control" name="Password" id="" placeholder="Ingrese Contraseña"/>
                 </div>
                 <div className="col-12">
                   <label for="inputAddress" className="form-label">Direccion de Residencia</label>
-                  <input type="text" className="form-control" name="textDireccion" id="" placeholder="1234 Main St"/>
+                  <input type="text" className="form-control" name="Direccion" id="" placeholder="1234 Main St"/>
                 </div>
                 <div className="col-md-6">
                   <label for="inputCity" className="form-label">Ciudad</label>
-                  <input type="text" className="form-control" name="textCiudad" id=""/>
+                  <input type="text" className="form-control" name="Ciudad" id=""/>
                 </div>
                 <div className="col-md-6">
                   <label for="inputCity" className="form-label">Nombre Usuario</label>
-                  <input type="text" className="form-control" name="textCiudad" id=""/>
+                  <input type="text" className="form-control" name="Nombre" id=""/>
                 </div>
                 {/* <!-- <div className="col-md-4">
                   <label for="inputState" className="form-label">Estado Solicitud</label>

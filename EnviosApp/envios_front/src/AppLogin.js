@@ -16,7 +16,7 @@ function App() {
          pass:data.get("txtPassword")
         }
 
-            alert(userData.email)
+            // alert(userData.email)
 
             const requestOptions = {        method: 'POST', headers: { 'Content-Type': 'application/json' },      
                       body: JSON.stringify(userData) };    
@@ -28,7 +28,11 @@ function App() {
                         window.localStorage.setItem('username', userData.email)
                         window.localStorage.getItem('username')
                         navigate('/Menu');
-                      }
+                    }
+                        else{
+                        alert("usuario o contraseña invalida")
+                        }
+                      
                     });
        }
       

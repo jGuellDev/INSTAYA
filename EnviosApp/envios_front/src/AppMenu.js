@@ -8,6 +8,7 @@ import React, { useState, useEffect } from 'react';
 
 function App5() {
   // const[usuario,setUsuario]=useState(Dataordenes)
+  const Usuario =window.localStorage.getItem('username')
   const[ordenesApi,setordenesApi]=React.useState([]);
   // React.useEffect(() => {
 //fetch('http://localhost:5000/login')
@@ -21,7 +22,7 @@ function App5() {
   useEffect(() => {    // POST request using fetch inside useEffect React hook    
                     const requestOptions = {  method: 'GET', headers: { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzN2Q0MjZiZDUxYTRhYTM4NTk4MDhlZCIsInVzdWFyaW8iOiJqbGd1ZWxsQHVuaW5vcnRlLmVkdS5jbyIsImlhdCI6MTY2OTY5Mjk1OX0.zDSsBpKbaKHVCqjJ_1UAG43kXKYkxjt21cXzyGiKYr4' },      
                           };    
-                      fetch('http://localhost:5000/ordenes/buscartodos', requestOptions)   // ruta del back
+                      fetch('http://localhost:5000/ordenes/buscartodos/'+Usuario, requestOptions)   // ruta del back
                       .then(response => response.json())        
                       .then(data => { console.log('los datos recibidos POR MENU fueron', data); setordenesApi(data) });
     
@@ -59,7 +60,7 @@ function App5() {
          </li>
          </Link>
 
-         <Link to="/Actualizacion">
+         <Link to="/Menu">
          <li>
              <i class='bx bxs-backpack' ></i>
            <span class="tooltip">Actualiza Ordenes</span>

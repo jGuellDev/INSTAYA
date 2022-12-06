@@ -1,5 +1,5 @@
 import { Link} from "react-router-dom";
-import FormularioOrden from "./Components/FormularioOrden";
+import FormularioCrearOrden from "./Components/FormularioCrearOrden";
 import { useState } from 'react';
 
 function App3() {
@@ -23,7 +23,7 @@ const TipoCrear ="Crear"
 
 
             <div className="fw-bold text-center py-4">
-              <FormularioOrden data={TipoCrear}/>
+              <FormularioCrearOrden data={TipoCrear}/>
                   <Link to="/Menu" className="col-md-6">
                       <input type="button" value="Regresar" name="btncrearOrden" className="btn btn-primary" style={{float:"right"}}/>
                      </Link>           

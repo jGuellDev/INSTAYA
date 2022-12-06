@@ -6,9 +6,9 @@ const ordenesController = require("../controllers/ordenes.controller") // el con
 
 // cuando hagan un post a esta ruta, tu vas a correr el controlador create
 router.post("/", ordenesController.create) // metodo creado en Controller/empleados.controller.js
-router.get("/buscartodos", ordenesController.find)    // metodo creado en Controller/empleados.controller.js
+router.get("/buscartodos/:usuario", ordenesController.find)    // metodo creado en Controller/empleados.controller.js
 router.get("/:id", ordenesController.findOne)    // metodo creado en Controller/empleados.controller.js
-router.put("/:id", ordenesController.update)    // metodo creado en Controller/empleados.controller.js
+router.put("/:numeroOrden", ordenesController.update)    // metodo creado en Controller/empleados.controller.js
 router.delete("/:id", ordenesController.remove)    // metodo creado en Controller/empleados.controller.js
 
 
